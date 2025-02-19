@@ -35,11 +35,11 @@ public class PersonaRepositoryTest {
 
         personaRepository.save(persona);
 
-        // Listamos todas las Personas
-        Iterable<Persona> valores = personaRepository.findAll();
+        // Listar
+        Iterable<Persona> listaPersonas = personaRepository.findAll();
 
-        // Comprobar que valores no es nulo y que el Persona se guardó en la lista
-        assertNotNull(valores);
+        // Comprueba que no es nulo y que persona se guardó en la lista
+        assertNotNull(listaPersonas);
     }
 
     @Test
@@ -51,16 +51,16 @@ public class PersonaRepositoryTest {
     }
 
     @Test
-    public void testLeerUno() {
+    public void testLeerUnId() {
 
-        Persona personaAGuardar = new Persona(null, "Nunchy", "Pradanos", 39l);
-        personaRepository.save(personaAGuardar);
+        Persona personaALeer = new Persona(null, "Tyler", "Durden", 39l);
+        personaRepository.save(personaALeer);
 
-        Optional<Persona> resultado = personaRepository.findById(personaAGuardar.getId());
+        Optional<Persona> resultado = personaRepository.findById(personaALeer.getId());
 
-        // Verificamos que el Persona existe
+        // Comprobamos que  existe
         assertFalse(resultado.isEmpty());
-        assertEquals(personaAGuardar.getId(), resultado.get().getId());
+        assertEquals(personaALeer.getId(), resultado.get().getId());
     }
 
     @Test

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.asender.ejerc005.model.Persona;
 import es.santander.asender.ejerc005.repository.PersonaRepository;
  
+@Transactional
 @Service
 public class PersonaService {
 
@@ -29,7 +31,7 @@ public class PersonaService {
 
     }
 
-    // Leer uno
+    // Leer un registro por id
     public Persona read(Long id) {
         return repository.findById(id).orElse(null);
     }

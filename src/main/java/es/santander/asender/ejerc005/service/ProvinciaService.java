@@ -4,26 +4,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.asender.ejerc005.model.Provincia;
 import es.santander.asender.ejerc005.repository.ProvinciaRepository;
- 
 
- 
-
-    @Service
+@Transactional
+@Service
 public class ProvinciaService {
 
     @Autowired
     private ProvinciaRepository repository;
 
-    
-
     // CREATE
     public Provincia create(Provincia provincia) {
 
         if (provincia.getId() != null) {
-            throw new CrudSecurityException("Han tratado de modificar un registro provincia",
+            throw new CrudSecurityException("No se debe enviar un ID en la solicitud POST. El ID es autogenerado",
                     CRUDOperation.CREATE,
                     provincia.getId());
         } else {
@@ -58,5 +55,3 @@ public class ProvinciaService {
     }
 
 }
-
- 
