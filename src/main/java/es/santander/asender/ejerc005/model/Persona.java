@@ -13,23 +13,28 @@ import jakarta.persistence.Table;
 public class Persona {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nombre;
 
     private String apellido;
  
-    private Provincia provincia;
+    private Long provincia_id;
 
     // Constructores
     public Persona() {}
 
-    public Persona(String nombre, String apellido, Provincia provincia) {
+   
+
+    public Persona(Long id, String nombre, String apellido, Long provincia_id) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.provincia = provincia;
+        this.provincia_id = provincia_id;
     }
+
+
 
     // Getters y Setters
     public Long getId() {
@@ -56,12 +61,17 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public Provincia getProvincia() {
-        return provincia;
+
+
+    public Long getProvincia_id() {
+        return provincia_id;
     }
 
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
+
+
+    public void setProvincia_id(Long provincia_id) {
+        this.provincia_id = provincia_id;
     }
 
+    
 }
