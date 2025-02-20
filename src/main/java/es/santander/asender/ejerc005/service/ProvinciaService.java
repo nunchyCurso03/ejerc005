@@ -16,7 +16,7 @@ public class ProvinciaService {
     @Autowired
     private ProvinciaRepository repository;
 
-    // CREATE
+    // CREAR 
     public Provincia create(Provincia provincia) {
 
         if (provincia.getId() != null) {
@@ -29,12 +29,12 @@ public class ProvinciaService {
 
     }
 
-    // Leer uno
+    // Leer uno por id
     public Provincia read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    // Listar
+    // Listar todos
     public List<Provincia> list() {
         return repository.findAll();
     }

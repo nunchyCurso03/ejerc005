@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import es.santander.asender.ejerc005.model.Persona;
-
- 
 
 @SpringBootTest
 public class PersonaRepositoryTest {
@@ -28,25 +28,37 @@ public class PersonaRepositoryTest {
     public void setUp() {
 
         persona = new Persona(null, "Nunchy", "Pradanos", 39l);
+        personaRepository.save(persona);
+
+    }
+
+    @AfterEach
+    public void tearDown() {
+        personaRepository.deleteAll();
     }
 
     @Test
     public void testList() {
 
-        personaRepository.save(persona);
-
         // Listar
-        Iterable<Persona> listaPersonas = personaRepository.findAll();
+        List<Persona> listaPersonas = personaRepository.findAll();
 
         // Comprueba que no es nulo y que persona se guardó en la lista
         assertNotNull(listaPersonas);
+
+        // Comprueba que hay un registro
+        assertEquals(1, listaPersonas.size());
+
+        // Comprueba que la lista es mayor que uno
+        assertTrue(listaPersonas.size() <= 1);
     }
 
     @Test
-    public void testNoExiste() {
-        // ID que no exista
+    public void testIdNoExiste() {
+        // Creamos un ID que no exista
         Optional<Persona> resultado = personaRepository.findById(202L);
 
+        //Comprobamos que esta vacío
         assertTrue(resultado.isEmpty());
     }
 
@@ -56,17 +68,18 @@ public class PersonaRepositoryTest {
         Persona personaALeer = new Persona(null, "Tyler", "Durden", 39l);
         personaRepository.save(personaALeer);
 
-        Optional<Persona> resultado = personaRepository.findById(personaALeer.getId());
+        Optional<Persona> personaEncontrada = personaRepository.findById(personaALeer.getId());
 
-        // Comprobamos que  existe
-        assertFalse(resultado.isEmpty());
-        assertEquals(personaALeer.getId(), resultado.get().getId());
+        // Comprobamos que existe
+        assertFalse(personaEncontrada.isEmpty());
+        assertEquals("Tyler", personaALeer.getNombre());
+        assertEquals(personaALeer.getId(), personaEncontrada.get().getId());
     }
 
     @Test
     public void testGuardarPersona() {
 
-        Persona personaAGuardar = new Persona(null, "Nunchy", "Pradanos", 39l);
+        Persona personaAGuardar = new Persona(null, "Pepa", "Pérez", 12l);
 
         Persona personaGuardada = personaRepository.save(personaAGuardar);
 
@@ -88,6 +101,7 @@ public class PersonaRepositoryTest {
 
         assertEquals("Seve", personaActualizada.getNombre());
         assertEquals("Ballesteros", personaActualizada.getApellido());
+        assertEquals(39L, personaActualizada.getProvincia_id());
     }
 
     @Test

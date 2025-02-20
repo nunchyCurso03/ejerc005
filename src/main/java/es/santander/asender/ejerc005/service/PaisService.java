@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.asender.ejerc005.model.Pais;
-import es.santander.asender.ejerc005.model.Persona;
 import es.santander.asender.ejerc005.repository.PaisRepository;
 
 @Transactional

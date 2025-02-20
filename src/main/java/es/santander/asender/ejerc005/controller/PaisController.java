@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.santander.asender.ejerc005.model.Pais;
-import es.santander.asender.ejerc005.model.Persona;
+import es.santander.asender.ejerc005.model.Pais; 
 import es.santander.asender.ejerc005.service.PaisService;
-import es.santander.asender.ejerc005.service.PersonaService;
-
+ 
 @RestController
 @RequestMapping("/api/pais")
 public class PaisController {
